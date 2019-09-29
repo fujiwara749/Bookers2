@@ -1,0 +1,96 @@
+<div class="container">
+<div class="row">
+<div class="col-xs-3">
+<h2>User info</h2>
+<%= form_tag("/users/#{@user.id}/update", {multipart: true})do %>
+<div><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumd",fallback: "no_image.jpg" %></div>
+ <% end %>
+<table class="table">
+  <tbody>
+<tr>
+<th>name</th><th><%= @user.name %></th>
+</tr>
+<tr>
+<th>introduction</th><th><%= @user.introduction %></th>
+</tr>
+</tbody>
+</table>
+<div class="row">
+<%= link_to edit_user_path(@user), class: 'btn btn-default col-xs-12' do  %>
+<i class="glyphicon glyphicon-wrench">
+  </i>
+<% end %>
+</div>
+
+
+<h2>New book</h2>
+
+<%= form_for(@book) do |f| %>
+ <% if @book.errors.any? %>
+        <%= @book.errors.count %>件のerrorが発生しました
+        <% @book.errors.full_messages.each do |message| %>
+            <%= message %>
+        <% end %>
+    <% end %>
+
+ <h3>Title</h3>
+
+ <%= f.text_field :title %>
+
+ <h4>Opinion</h4>
+ <%= f.text_area :body %>
+ <div class="field row">
+ <%= f.submit 'Create Book', class:"btn btn-primary col-xs-12" %>
+ </div>
+<% end %>
+</div>
+
+<div class="col-xs-9">
+<h3>Books</h3>
+ <table class="table">
+  <thead>
+   <tr>
+   	<th>Title</th>
+    <th>Opinion</th>
+   </tr>
+  </thead>
+
+ <% @books.each do |book|%>
+ <tbody>
+  <tr>
+  <td><%= link_to user_path(book.user_id) do %>
+<%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, class: "img-circle pull-left profile-thumd",fallback: "no_image.jpg", size:'60x60' %>
+<% end %>
+</td>
+  <td><%= link_to book_path(book.id) do %>
+    <%= book.title %>
+<% end %>
+   </td>
+   <td>
+    <%= book.body %>
+   </td>
+   </tr>
+  <% end %>
+ </tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+<footer>
+  <div class="container">
+  <div class="row">
+  <div class="col-xs-3 col-xs-offset-9">
+    <P>CopyRight Infratop.inc</P>
+  </div>
+</div>
+</div>
+</footer>
+
+
+
+
+
+
+

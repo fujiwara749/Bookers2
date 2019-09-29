@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<body class="header1">
+ <header class="navbar navbar-fixed-top navbar-inverse">
+ <div class="container">
+  <nav class="nav navbar-nav navbar-left ">
+
+     <h2 class="bookers">Bookers</h2>
+   </nav>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  
+  <nav>
+    <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-anamations="zoomIn fadeInup fadeIn">
+ <% if user_signed_in? %>
+<%= link_to(user_path(current_user)) do %>
+<span class="glyphicon glyphicon-home"></span>
+<i>Home</i>
+<% end %>
+<%= link_to(users_path) do %>
+<span class="glyphicon glyphicon-user"></span>
+<i>Users</i>
+<% end %>
+<%= link_to(books_path) do %>
+<span class="glyphicon glyphicon-book"></span>
+<i>Books</i>
+<% end %>
+<%= link_to(destroy_user_session_path, method: :delete) do %>  
+<span class="glyphicon glyphicon-log-out"></span>
+<i>logout</i>
+<% end %>
+ <% else %>
+<%= link_to(root_path) do %>
+<span class="glyphicon glyphicon-home"></span>
+<i>Home</i>
+<% end %>
+<%= link_to(home_about_path) do %>
+<span class="glyphicon glyphicon-link"></span>
+<i>About</i>
+<% end %>
+<%= link_to(new_user_registration_path) do %>
+<span class="glyphicon glyphicon-edit"></span>
+<i>sign up</i>
+<% end %>
+<%= link_to(new_user_session_path) do %>
+<span class="glyphicon glyphicon-log-in"></span>
+<i>login</i>
+<% end %>
+ <% end %>
+</ul>
+</div>
+ </header>
+
+ <% if flash[:notice] %>
+  <%= flash[:notice] %>
+<% end %>
+      <%= yield %>
+</body>
+  
+</html>

@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="row">
+<h1>Editing Book</h1>
+
+<%= form_for(@book) do |f| %>
+ <% if @book.errors.any? %>
+        <%= @book.errors.count %>件のerrorが発生しました
+        <% @book.errors.full_messages.each do |message| %>
+            <%= message %>
+        <% end %>
+    <% end %>
+    <div class="field row">
+<p>Title</p>
+<%= f.text_field :title, class: 'col-xs-12' %>
+</div>
+<div class="field row">
+<p>Opinion</p>
+	<%= f.text_area :body, class: 'col-xs-12' %><br>
+</div>
+<br>
+<div class="row">
+<%= f.submit "Update Book", class:"btn btn-primary col-xs-12" %>
+<% end %>
+</div>
+</div>
+</div>
+
+
+<%= link_to "Show", book_path %>
+<%= link_to "Back", books_path %>
+
+
+<footer>
+	<div class="container">
+	<div class="row">
+	<div class="col-xs-3 col-xs-offset-9">
+		<P>CopyRight Infratop.inc</P>
+	</div>
+</div>
+</div>
+</footer>
